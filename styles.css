@@ -1,0 +1,480 @@
+/* =========================================================
+   Ghost — Custom Stylesheet
+   Fonts:   Orbitron (header) · Rajdhani (cards) · Inter (body)
+   Palette: near-black bg · phosphor green accents · terminal text
+   ========================================================= */
+
+/* ── Variables ───────────────────────────────────────────── */
+/* Default: dark mode */
+:root,
+[data-theme="dark"] {
+  --bg-base:       #020d02;
+  --bg-surface:    #071307;
+  --bg-raised:     #0d1f0d;
+  --bg-hero:       #040f04;
+
+  --indigo-bright: #00ff41;
+  --indigo-dim:    #00b32c;
+  --indigo-subtle: #092909;
+
+  --text-primary:  #d4f5d4;
+  --text-secondary:#7ab87a;
+  --text-muted:    #3d6b3d;
+
+  --border:        #163016;
+  --border-accent: #00cc33;
+
+  --radius-sm:     6px;
+  --radius-md:     12px;
+  --radius-lg:     18px;
+
+  --font-display:  'Iceland', monospace;
+  --font-card:     'Iceland', monospace;
+  --font-body:     'Google Sans', sans-serif;
+}
+
+
+/* ── Base ─────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--text-primary);
+  background-color: var(--bg-base);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+a {
+  color: var(--indigo-bright);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+a:hover {
+  color: #a5b4fc;
+}
+
+/* ── Header ──────────────────────────────────────────────── */
+.site-header {
+  background-color: #000;
+  border-bottom: 1px solid var(--border-accent);
+  padding: 1.25rem 0;
+}
+
+.site-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: lowercase;
+  color: #000;
+  margin: 0;
+
+  /* glow-only — text color matches header bg so only the bloom is visible */
+  text-shadow:
+    0 0 6px rgba(0, 255, 65, 0.512),
+    0 0 16px rgba(0, 255, 65, 0.461),
+    0 0 40px rgba(0, 255, 65, 0.307),
+    0 0 80px rgba(0, 255, 65, 0.128);
+}
+
+
+/* clickable title link */
+.site-title-link {
+  color: inherit;
+  text-decoration: none;
+}
+.site-title-link:hover {
+  color: inherit;
+  opacity: 0.8;
+}
+
+/* ── Sidebar ─────────────────────────────────────────────── */
+.sidebar-nav {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 1.5rem 1.25rem;
+  position: sticky;
+  top: 1.5rem;
+}
+
+.sidebar-heading {
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--indigo-bright);
+  margin-bottom: 1.25rem;
+}
+
+.sidebar-links {
+  margin: 0;
+  padding: 0;
+}
+
+.sidebar-links li {
+  border-bottom: 1px solid var(--border);
+}
+.sidebar-links li:last-child {
+  border-bottom: none;
+}
+
+.sidebar-link {
+  display: block;
+  padding: 0.6rem 0.25rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: color 0.2s, padding-left 0.2s;
+}
+.sidebar-link:hover,
+.sidebar-link.active {
+  color: var(--text-primary);
+  padding-left: 0.6rem;
+}
+
+.sidebar-link.active {
+  color: var(--indigo-bright);
+  border-left: 2px solid var(--indigo-bright);
+  padding-left: 0.5rem;
+}
+
+/* ── Hero Card ───────────────────────────────────────────── */
+.hero-card {
+  background:
+    linear-gradient(135deg, var(--indigo-subtle) 0%, var(--bg-hero) 70%);
+  border: 1px solid var(--border-accent);
+  border-radius: var(--radius-lg);
+  min-height: 240px;
+  display: flex;
+  align-items: flex-end;
+  padding: 2.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* secondary variant — slightly dimmer green for visual distinction */
+.hero-card--secondary {
+  background: linear-gradient(135deg, #051a05 0%, #020d02 60%);
+  border-color: #00802b;
+}
+.hero-card--secondary .hero-label {
+  color: #00cc33;
+  border-color: #00661a;
+}
+.hero-card--secondary .btn-hero {
+  background-color: #00802b;
+}
+.hero-card--secondary .btn-hero:hover {
+  background-color: #006622;
+  box-shadow: 0 0 14px rgba(0, 204, 51, 0.5);
+}
+
+[data-theme="light"] .hero-card--secondary {
+  background: linear-gradient(135deg, #d4edda 0%, #eafaea 60%);
+  border-color: #009900;
+}
+
+/* subtle grid texture */
+.hero-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 32px 32px;
+  opacity: 0.18;
+  pointer-events: none;
+}
+
+.hero-card-inner {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-label {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--indigo-bright);
+  border: 1px solid var(--indigo-dim);
+  border-radius: 4px;
+  padding: 0.2em 0.6em;
+  margin-bottom: 0.85rem;
+}
+
+.hero-title {
+  font-family: var(--font-card);
+  font-size: clamp(1.2rem, 2vw, 1.7rem);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.hero-subtitle {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  max-width: 520px;
+  margin-bottom: 1.25rem;
+}
+
+.btn-hero {
+  background-color: var(--indigo-bright);
+  color: #000;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  padding: 0.5rem 1.25rem;
+  border-radius: var(--radius-sm);
+  border: none;
+  transition: background-color 0.2s, box-shadow 0.2s;
+}
+.btn-hero:hover {
+  background-color: #00b32c;
+  color: #000;
+  box-shadow: 0 0 14px rgba(0, 255, 65, 0.5);
+}
+
+/* ── Article Card ────────────────────────────────────────── */
+.article-card {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 2rem 2.25rem;
+}
+
+.article-tag {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 0.6rem;
+}
+
+.article-title {
+  font-family: var(--font-card);
+  font-size: clamp(0.95rem, 1.6vw, 1.2rem);
+  font-weight: 700;
+  font-style: italic;
+  color: var(--text-primary);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 0.3rem;
+}
+
+.article-meta {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-bottom: 1.25rem;
+}
+
+.article-body {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+}
+
+.article-readmore {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--indigo-bright);
+  letter-spacing: 0.03em;
+}
+.article-readmore:hover {
+  color: #a5b4fc;
+}
+
+/* ── Cert List ───────────────────────────────────────────── */
+.cert-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.cert-item {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 1.1rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.cert-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.cert-item:first-child {
+  padding-top: 0.25rem;
+}
+
+.cert-code {
+  font-family: var(--font-display);
+  font-size: clamp(0.95rem, 1.6vw, 1.2rem);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--indigo-bright);
+  text-transform: uppercase;
+  min-width: 5.5rem;
+  flex-shrink: 0;
+}
+
+.cert-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  flex: 1;
+}
+
+.cert-vendor {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.cert-title {
+  font-family: var(--font-card);
+  font-size: clamp(0.95rem, 1.6vw, 1.2rem);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
+.cert-subtitle {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+}
+
+.cert-badge {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--indigo-bright);
+  border: 1px solid var(--indigo-dim);
+  border-radius: var(--radius-sm);
+  padding: 0.2em 0.55em;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* ── Footer ──────────────────────────────────────────────── */
+.site-footer {
+  background-color: #000;
+  border-top: 1px solid var(--border-accent);
+  padding: 1.25rem 0;
+  margin-top: auto;
+}
+
+.footer-brand {
+  font-family: var(--font-display);
+  font-size: 1.275rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--text-muted);
+}
+
+.footer-email {
+  font-size: 0.945rem;
+  color: var(--text-secondary);
+  transition: color 0.2s;
+}
+.footer-email:hover {
+  color: var(--indigo-bright);
+}
+
+/* ── Thumbnail sidebar ───────────────────────────────────── */
+.thumbnail-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  position: sticky;
+  top: 1.5rem;
+}
+
+.thumbnail-card {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  position: relative;
+  transition: border-color 0.2s, box-shadow 0.2s;
+
+  /* scanline texture */
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent,
+    transparent 3px,
+    rgba(0, 255, 65, 0.03) 3px,
+    rgba(0, 255, 65, 0.03) 4px
+  );
+}
+
+.thumbnail-card:hover {
+  border-color: var(--border-accent);
+  box-shadow: 0 0 10px rgba(0, 255, 65, 0.15);
+}
+
+.thumbnail-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: grayscale(100%) brightness(0.85) sepia(1) hue-rotate(90deg) saturate(3);
+}
+
+/* CRT phosphor green overlay — sits above image, below scanlines */
+.thumbnail-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 255, 65, 0.12);
+  mix-blend-mode: screen;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ── Responsive tweaks ───────────────────────────────────── */
+@media (max-width: 767.98px) {
+  .sidebar-nav {
+    position: static;
+  }
+
+  .hero-card {
+    min-height: 200px;
+    padding: 1.75rem;
+  }
+
+  .article-card {
+    padding: 1.5rem;
+  }
+}
